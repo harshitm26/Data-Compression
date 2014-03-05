@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\newtheorem{theorem}{Theorem}
+\usepackage{tabu}% Used for ready to use table properties
+\usepackage[]{algorithm2e} % Used for loading the algorithm package
+%\usepackage{hyperref} %used for embedding url
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+
+\usepackage{hyperref} % Used for url 
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Indian Institute of Technology, Kanpur, CSE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge CS698D, Mid-Semester Examination  \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Harshit Maheshwari} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%------------------------------------------------
+%Question 1
+%------------------------------------------------
+\section{Problem 1}
+Reference: 
+\url{https://en.wikipedia.org/wiki/Information_theory_and_measure_theory}
+Let $X$ and $Y$ be two independent fair coin flips and $Z$ be their 
+$XOR$. The following table shows the corresponding probability distribution: 
+\begin{table}[h]
+	\caption{Probability distribution of random variables $X,Y,X$}
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		 x,y,z=0,0,0 & $\frac{1}{4}$  &  x,y,z=0,1,0 & 0 \\
+		 x,y,z=0,0,1 & 0			  &  x,y,z=0,1,1 & $\frac{1}{4}$ \\
+		 \hline
+	 	 x,y,z=1,0,0 & 0			  &  x,y,z=1,1,0 & $\frac{1}{4}$ \\
+		 x,y,z=1,0,1 & $\frac{1}{4}$  &  x,y,z=1,1,1 & 0 \\
+		\hline
+	\end{tabular}
+\end{table}
+For this probability distribution, \\
+$		I(X;Y;Z) = H(X) - H(X|Y) - H(X|Z) + H(X|Y,Z)\\\\
+		 = \sum_{x}p(x)\log(p(x)) + \sum_{x,y}p(x,y)\log(p(x|y)) + \sum_{x,z}	p(x,z)\log(p(x|z)) - \sum_{x,y,z}p(x,y,z)\log(p(x|y,z))\\\\
+		 = (-p(x=0)\log p(x=0)\ -p(x=1)\log p(x=1))\ + (p(x=0,y=0)\log(p(x=0|y=0))\ +\ p(x=0,y=1)\log(p(x=0|y=1))\ +\  p(x=1,y=0)\log(p(x=1|y=0))\ +\ p(x=1,y=1)\log(p(x=1|y=1))\ +\ 
+(p(x=0,z=0)\log(p(x=0|z=0))\ +\ p(x=0,z=1)\log(p(x=0|z=1))\ +\  p(x=1,z=0)\log(p(x=1|z=0))\ +\ p(x=1,z=1)\log(p(x=1|z=1))\ +\ 
+(p(x=0,y=0,z=0)\log(p(x=0|y=0,z=0))\ +\ p(x=0,y=0,z=1)\log(p(x=0|y=0,z=1))\ +\ p(x=0,y=1,z=0)\log(p(x=0|y=1,z=0))\ +\ p(x=0,y=1,z=1)\log(p(x=0|y=1,z=1))\ +\ p(x=1,y=0,z=0)\log(p(x=1|y=0,z=0))\ +\ p(x=1,y=0,z=1)\log(p(x=1|y=0,z=1))\ +\ p(x=1,y=1,z=0)\log(p(x=1|y=1,z=0))\ +\ p(x=1,y=1,z=1)\log(p(x=1|y=1,z=1)))\\\\
+		 =2\left(-\frac{1}{2}\log\frac{1}{2}\right) + 4\left(\frac{1}{4}\log\frac{1}{2}\right) + 4\left(\frac{1}{4}\log\frac{1}{2}\right) + 0\\
+		 =-1
+$ \\
+%------------------------------------------------
+%Question 2
+%------------------------------------------------
+\section{Problem 2}
+Reference: Algorithm Design -John Kleinberg and Eva Tardos\\
+\textbf{Given:}\\
+Alphabet $A={a_1,...a_k}$\\
+Statistical probability distribution $(p(a_1),..p(a_k))$\\
+Empirical probability distribution $(q(a_1), ... q(a_k))$\\
+where
+\begin{equation}
+	q(a_i) = \frac{\text{no. of occurences of} a_i \text{ in } x}{n}
+\end{equation}
+\textbf{Claim}\\
+q is always better (\textbf{or equal})than encoding with any other p. \\
+\textbf{Proof}\\
+If the prefix tree generated using Huffman Algorithm corresponding to p is same as q then both have same compression. \\
+If the tree is different then: \\
+\begin{equation}
+	\rho(q) \leq \rho(p)
+\end{equation}
+
+It is easy to see that there is an optimal prefix code, with corresponding tree $T^*$, in which the two lowest-frequency letters are assigned to leaves that are siblings in $T^*$. \\
+\textbf{Algorithm:}\\
+The algorithm merges the two lowest frequency letters $y^*, z^* \in S$ into a single leaf $\omega$, calls itself recursively on the smaller alphabet $S'$ (all alphabets excluding $y^*$ and $z^*$ including $\omega$), and by induction produces an optimal prefix code for $S'$, represented by a labelled binary tree $T'$. $T'$ is then extended into a tree $T$ for $S$ by attaching leaves labelled $y^*$ and $z^*$ as children of the node in $T'$ labelled $\omega$. \\
+
+\textbf{Claim:}\\
+$AB(T') = AB(T) - f_\omega$, where $AB(T')$ and $AB(T)$ are the average number of bits per alphabet to encode letters in $S'$ and $S$ respectively.\\
+\textbf{Proof:}
+\begin{align*}
+	AB(T) = \sum_{x\in S}f_x. depth_T(x)\\
+	=f_{y^*}.depth_T(y^*)+f_{z^*}.depth(x^*) + \sum_{x\neq y^*,z^*}f_x.depth_T(x)\\
+	=(f_{y^*} + f_{y^*}).(1 + depth_{	T'}(\omega)) + \sum_{x\neq y^*,z^*}f_x.depth_T(x)\\
+	=f_{\omega}.(1 + depth_{T'}(\omega)) + \sum_{x\neq y^*,z^*}f_x.depth_T(x)\\
+	=f_{\omega} + f_{\omega}.depth_{T'}(\omega) + \sum_{x\neq y^*,z^*}f_x.depth_T(x)\\				
+		=f_{\omega} + \sum_{x\in S}f_x.depth_{T'}(x)\\
+		=f_\omega + AB(T')				
+\end{align*}
+\textbf{Proof by contradiction:}\\
+Suppose tree $T$ is not optimal and $\exists Z$ which is optimal tree;i.e. $AB(Z)< AB(T)$ and $Z$ has leaves representing $y^*$ and $z^*$ as siblings.\\
+If we replace the leaves $y^*$ and $z^*$ with their parent leaf $\omega$, we get a tree $Z'$ that defines a prefix code for $S'$. So, $AB(Z')= AB(Z)-f_\omega$\\
+Since, Z is the optimum tree we have $AB(Z)< AB(T)$; subtracting $f_\omega$ from both sides of this inequality we get $AB(Z')< AB(T')$, which contradicts the optimality of $T'$ as a prefix code for $S'$. \\\\
+So, the compression corresponding to the prefix tree generated by Huffman Algorithm is optimum. 
+Any probability distribution which does not generates the same prefix tree using Huffman Algorithm as given by Huffman Algorithm on the empirical probability distribution will have lesser(or equal) compression.
+
+%------------------------------------------------
+%Question 3
+%------------------------------------------------
+\section{Problem 3}
+\subsection{}
+\textbf{Given: }\\
+$\phi: A\rightarrow \{0,1,2,.. |A|-1\}$ is the encoding of letters in $A$\\
+A parsed phrase $I(\text{phrase}_n)$ is encoded as: \\
+$(n-i)*|A| + \phi(a)$\\ 
+$=(n-\text{prev}(n))*|A| + \phi(a)$\\
+where $i=\text{prev}(n)$ is some previous $i^{th}$ phrase followed by a symbol $a$.
+Since, $1\leq \text{prev}(n) < n$\\
+\begin{align*}
+	0\leq I(x[n_{j-1}+1...,\ n_j]) \leq (n-1)*|A| + |A|-1\\
+	0\leq I(x[n_{j-1}+1...,\ n_j]) \leq n|A|-1
+\end{align*}
+Now, length of encoding:
+(for $p+1$ phrases) 
+\begin{align*}
+	 L = \sum_{j=1}^{p+1}L_j\\
+	 =\sum_{j=1}^{p+1}\left\lceil \log(j|A|)\right\rceil\\
+	 \leq \sum_{j=1}^{p+1}\log(j|A|) + 1\\
+	 \leq \sum_{j=1}^{p+1}\log(2j|A|)\\
+	 \leq (p+1)\log(2|A|(p+1))\\
+	\rho(E, x)\leq \frac{(p+1)}{n\log(|A|)}\log(2|A|(p+1))\\
+\leq \frac{c(x)+1}{n\log|A|}\log(2|A|(c(x)+1))
+\end{align*}
+where, $c(x)$ is the maximum number of distinct phrases that we can parse. 
+\subsection{}
+Consider the Champornoure sequence:\\ 0,1,0,0,0,1,1,0,1,1,0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,....\\
+Using Lempel-Ziv compression we get: 
+\begin{table}[h]
+	\caption{Lempel-Ziv encoding for Champornoure sequence}
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\multicolumn{3}{|c|}{$\lambda$}\\
+		\hline
+		\textbf{i}	& \textbf{n-i} & \textbf{Next Symbol} \\
+		\hline
+		0	&	-1	&	0\\
+		0	& 	-2	&	1\\
+		1	&	-2	&	0\\
+		1	&	-2	&	0\\
+		1	&	-3	&	1\\
+		2	&	-3	&	1\\
+		2	&	-4	&	1\\
+		3	&	-4	&	0\\
+		3	&	-5	&	1\\
+		4	&	-5	&	0\\
+			&	...	&	\\		
+			\hline				
+	\end{tabular}
+\end{table}\\
+Here, $n-i > i$. More specifically, 
+$n-i \geq i + N$ where $N$ is 1 or 2.
+%------------------------------------------------
+%Question 4
+%------------------------------------------------
+\section{Problem 4}
+\subsection{}
+Reference: \url{http://www.math.caltech.edu/~vdbult/ma108a/sola108a1.pdf}\\
+\textbf{To Show: }
+\begin{align*}
+	\lim_{n\rightarrow\infty}sup(a_n +b_n) \leq \lim_{n\rightarrow \infty}sup\ a_n + \lim_{n\rightarrow \infty} sup\ b_n
+\end{align*}
+\textbf{Proof:}\\
+If $a_n$ or $b_n$ is unbounded then the inequality is trivial. Otherwise, \\
+$sup_{m>n}a_m + sup_{m>n}b_m \geq a_x+b_x \ \forall x>n\ $[Definition of Supremum]\\
+$sup_{m>n}a_m + sup_{m>n}b_m$ is upper bound for $\{a_x + b_x | x>n\}$. \\
+\textbf{Claim:}\\
+\begin{equation}
+	sup_{m>n}a_m + sup_{m>n}b_m \geq sup_{m>n}(a_m + b_m)
+\end{equation}
+\textbf{Proof (by contradiction:}\\
+Suppose, \\
+$	sup_{m>n}a_m + sup_{m>n}b_m \leq sup_{m>n}(a_m + b_m)$\\
+Let
+ \begin{align}
+	a=sup\{a_m:m>n\}\\
+	b=sup\{b_m:m>n\}\\
+	c=sup\{a_m + b_m:m>n\}\\	
+	a + b<c \ \ \text{[By our assumption]}\\
+	\exists \kappa \text{s.t.} c = a + b + \kappa \\
+	\forall \epsilon > 0 \exists i \textbf{s.t.} a_i + b_i + \epsilon > c \ \ \text{[Definition of Supremum]}\\
+	a_i + b_i + \epsilon > a + b+ \kappa\\
+	a+ b \geq a_i + b_i\ \ \text{Definition of supremum} \\
+	\epsilon > \kappa \ \ \text{[From 4.8,4.9]}
+\end{align}
+But, since we can choose $\epsilon$ we choose it to be greater than $\kappa$.\\Therefore, contradiction. Hence, proved. \\
+Taking the limit in this inequality we get: 
+\begin{align*}
+	\lim_{n\rightarrow\infty}sup(a_n +b_n) \leq \lim_{n\rightarrow \infty}sup\ a_n + \lim_{n\rightarrow \infty} sup\ b_n
+\end{align*}
+\subsection{}
+Sequences for which this inequality is strict are:
+$a_n=(-1)^n$ and $b_n=(-1)^{n+1}$\\
+\begin{align*}
+	\lim_{n\rightarrow\infty} sup\ a_n = 1\\
+	\lim_{n\rightarrow\infty} sup\ b_n = 1\\
+	a_n + b_n = 0\ \text{So,}\\
+	\lim_{n\rightarrow\infty} sup\ (a_n + b_n) = 0\\
+	1+1 > 0
+\end{align*}
+
+
+\end{document}

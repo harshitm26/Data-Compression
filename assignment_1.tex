@@ -1,0 +1,325 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\usepackage[]{algorithm2e} % Used for loading the algorithm package
+%\usepackage{hyperref} %used for embedding url
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Indian Institute of Technology, Kanpur, CSE} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge CS698D, Assignment 1  \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Harshit Maheshwari} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%------------------------------------------------
+%Question 1
+%------------------------------------------------
+\section{Problem 1}
+The question is done according to the algorithm described in notes.
+\begin{algorithm}
+	\KwData{A sequence of words and numbers in an array: A}
+	\KwResult{Decompressed sequence of words: in $output$}
+	\While {($A[i] \neq \phi$)}{
+		\eIf{$A(i+1).type == word$}{
+			$output += A(i+1);$\\
+			$arr.first = A(i+1);$\\
+			$i += 2;$\\
+		}{
+			\If{$i>arr.length()$}{
+				$return\; \text{Error}$\\
+			}
+			
+			$word = arr(i);$\\
+			$output += word;$\\
+			$arr.remove(i);$\\
+			$arr.begin = word;$\\
+			$i++$;
+		}
+	}
+			
+\end{algorithm}
+%------------------------------------------------
+%Question 2
+%------------------------------------------------
+\section{Problem 2}
+Expected Length of first run: 
+\begin{align*}
+\begin{split}
+	E_l(2) 	&= \lim_{n\rightarrow \infty}\left(\sum_{l=1}^{n}p(l)l\right)\\
+			&= 1\left(\frac{1}{2^2} + \frac{1}{2^2}\right) + 
+	2\left(\frac{1}{2^3} + \frac{1}{2^3}\right) + ... \infty\\
+			&= 1.\left(\frac{1}{2}\right) + 2\left(\frac{1}{2^2}\right)+... + i\left(\frac{1}{2^i}\right)...\infty\\
+	\frac{E_1(2)}{2} &= 1.\left(\frac{1}{2^2}\right) + 2\left(\frac{1}{2^3}\right)+... i\left(\frac{1}{2^{(i+1)}}\right)...\ \infty\\
+	&\text{Subtracting the above 2 equations:}\\
+	\frac{E_1(2)}{2} &= \frac{1}{2} + \frac{1}{2^2} + \frac{1}{2^3}...\\
+	&= 1\\
+	E_1(2) &= 2\\
+\end{split}
+\end{align*}
+For alphabet os size: s\\
+\begin{align*}
+\begin{split}
+E_l(s) &= 1\left(\frac{s(s-1)}{s^2}\right) + 2\left(\frac{s(s-1)}{s^3}\right) + 3\left(\frac{s(s-1)}{s^4}\right) +\ ... \infty\\
+\frac{E_l(s)}{s} &= 1\left(\frac{s(s-1)}{s^3}\right) + 2\left(\frac{s(s-1)}{s^4}\right) + 3\left(\frac{s(s-1)}{s^5}\right) +\ ... \infty\\
+&\text{Subtracting the above 2 equations:}\\
+E_l(s)\left(1-\frac{1}{s}\right) &= s(s-1)\left(\frac{1}{s^2} + \frac{1}{s^3} + ...\right)\\
+&= \frac{s(s-1)}{s^2}\left(\frac{1}{1-\frac{1}{s}}\right)\\
+E_l(s) &= \frac{s}{s-1}\\\
+\end{split}
+\end{align*}
+%------------------------------------------------
+%Question 3
+%------------------------------------------------
+\section{Problem 3}
+We have a sequence of words: $w_1, w_2, w_3 .. w_n$\\
+\textbf{To show: }\\
+\begin{equation}
+	l_p(w_{i-1}, w_i) \geq l_p(w_i, w_j) \forall j<(i-1)
+\end{equation}
+\textbf{Proof by contradiction: }\\
+Suppose, $\exists j<i-1$ s.t. $l_p(w_{i-1}, w_i)[=l_1] \geq l_p(w_i, w_j) [=l_2]$\\
+Then, $w_{i-1}, w_j$ match till $l_1$ and $w_{i-1}(l_1+1) \neq w_j(l_1+1)$\\
+\begin{align*}
+w_{i-1}(l_1+1) & \leq w_i(l_1+1)\; \text{[Lexicographically sorted]}\\
+w_{i-1}(l_1+1) & \leq w_j(l_1+1)\\
+w_{i-1}(l_1+1) & < w_j(l_1+1)
+\end{align*}
+But then $j> i-1$\\
+$\Rightarrow\Leftarrow$\\
+Therefore, 
+	$l_p(w_{i-1}, w_i) \geq l_p(w_i, w_j) \forall j<(i-1)$
+%------------------------------------------------
+%Question 4
+%-----------------------------------------------
+\section{Problem 4}	
+\textbf{To prove}\\
+\begin{align*}
+H(Y|X)=0\;\leftrightarrow \;Y(X)\;\text{or}
+\\\forall x_0\in X\;\exists y_0 \in Y \; \text{s.t.} P(y_0|x_0)= 1 \text{and} \\
+P(y_1|x_0)=0\;\forall y_1 \neq y_0
+\end{align*}
+\textbf{Proof}\\
+$\Rightarrow$
+\begin{equation}
+\sum_y\sum_x P(x,y)\log \frac{1}{P(y|x)} = 0\\
+\end{equation}
+Since, each of the term in the summation is greater than 0, each term has to individually 0. Now, suppose,
+\begin{align*}
+	\exists y_1 \text{s.t.} P(y_1|x)\in(0,1)\\
+	\exists y_2 \text{s.t.} P(y_2|x)\in(0,1)
+\end{align*}
+Then, $P(x,y_1)\log \frac{1}{P(y_1|x)} \neq 0$.\\ Also, $P(x,y_2)\log \frac{1}{P(y_2|x)} \neq 0$\\
+$\Rightarrow\Leftarrow$\\
+$\Leftarrow$\\
+Suppose, $\exists y_0\; \text{s.t.}\; Pr(y_0|x_0)=1\; \text{and}\; Pr(y_1|x_0)=0\forall y\neq y_0$\\
+Then, it is easy to see that all the terms in the equation 4.2 are 0.\\
+Hence, proved. 
+%------------------------------------------------
+%Question 5
+%-----------------------------------------------
+\section{Problem 5}	
+\subsection{}
+\textbf{Case 1:}Sequence is unbounded. \\
+Then trivially limit is $\infty$ because the sequence is monotonically deceasing.\\
+\textbf{Case 2:}Sequence is bounded.\\
+Let $x = \inf \ x_n$\\
+$\forall \epsilon >0 \exists x_n \text{ s.t. } (x+\epsilon)>x_n$\ [By $\inf$ definition]\\
+%Let $N=n$\\
+$\forall m>n \ x_m<x_n$\\
+$\forall m>n \ x_m<x+\epsilon$\\
+$\forall \epsilon \forall m>N \ |x_m - x| < \epsilon$\\
+So, $x_m \rightarrow x$\\
+\subsection{}
+Let the sequence be $x_1, x_2, x_3.. $\\
+\begin{align*}
+lim\; \text{sup}\; x = lim_{n\rightarrow \infty}\text{sup}_{m>n}x_m\\
+\text{sup}_{m>i}x_m\geq \text{sup}_{m>(i+1)}x_m\\
+\end{align*}
+So, $\text{sup}_{m>i}x_m,\text{sup}_{m>(i+1)}x_m,...$ form a decreasing sequence. By analogy of previous result increasing sequence of real numbers has a limit. \\
+Similarly,\\ 
+\begin{align*}
+lim\; \text{inf}\; x = lim_{n\rightarrow \infty}\text{inf}_{m>n}x_m\\
+\text{inf}_{m>i}x_m\leq \text{inf}_{m>(i+1)}x_m
+\end{align*}
+So, $\text{inf}_{m>i}x_m,\text{inf}_{m>(i+1)x_m},...$ form an increasing sequence. By previous result this forms a decreasing sequence of real numbers has a limit. 
+%------------------------------------------------
+%Question 6
+%------------------------------------------------
+\section{Problem 6}
+We will show, \\
+\begin{equation}
+	f=O(g)\leftrightarrow \lim sup_{n\rightarrow \infty}\frac{|f(n)|}{|g(n)|}<\infty
+\end{equation}
+$\Rightarrow$\\
+If $g(n)=0$ then trivially $f(n)=0$. If $g(n)\neq 0:$\\
+$\exists C \exists n>N \; |f(n)|<C|g(n)|$\\
+\begin{equation}
+\frac{|f(n)|}{|g(n)|}\leq C
+\end{equation}
+If a sequence: $x$ is bounded above by C then $\lim sup x\leq C$\\
+Since, the sequence is bounded above by C. So, 
+\begin{equation}
+	\lim_{n\rightarrow\infty}sup \frac{|f(n)|}{|g(n)|}\leq C
+\end{equation}
+$\Leftarrow$\\
+We say that $\alpha = \lim sup_{n\rightarrow \infty }f(n)$ if following conditions hold: 
+\begin{align*}
+	(\epsilon>0)(\exists N)(\forall n>N)(f(n)<\alpha+\epsilon)\\
+	(\epsilon>0)(\forall N)(\exists n>N)(f(n)>\alpha-\epsilon)
+\end{align*}
+Putting $\epsilon = 1$ in the above definition. \\
+\begin{equation}
+	\forall n>N \frac{|f(n)|}{|g(n)|}<C+1
+\end{equation}
+\begin{equation}
+	\forall n>N\; |f(n)|\leq(C+1)|g(n)|
+\end{equation}
+So, $f(n) = O(g(n))$. Hence, proved. \\
+Reference: parc.im.pwr.wroc.pl/~cichon/Math/BigO.pdf
+	
+%------------------------------------------------
+%Question 7
+%------------------------------------------------
+\section{Problem 7}
+The function $f(x) = \frac{1}{x}$ is undefined on $x=0$ so it is discontinuous. [
+\begin{align*}
+	\lim_{x\rightarrow 0^-} f(x) = -\infty \\
+	\lim_{x\rightarrow 0+} f(x) = +\infty \\	
+\end{align*} 
+Since both the limits are different we cannot define $f(x)$ at $x=0$ s.t. the function becomes continuous.]\\
+$f:\mathbb{R} \rightarrow \mathbb{R}$ is continuous $\leftrightarrow \ \forall \epsilon ,x \exists \delta \forall y (|x-y| < \delta) \ \rightarrow \ (|f(x)-f(y)| < \epsilon)$\\
+Consider some point $x\neq 0$ at which we will show $f(x)$ is continuous. If $y>\frac{x}{2}$\\
+Choose $\delta<\text{min}\left(\frac{|x|}{2},\frac{\epsilon x^2}{2}\right)$\\
+\begin{align*}
+\Big|\frac{1}{x} - \frac{1}{y}\Big| = \Big|\frac{y-x}{xy}\Big| \leq \frac{\delta}{|x|(|x| - \delta)}\leq \frac{2\delta}{x^2}\leq \epsilon\\
+\end{align*}
+If $x\neq 0$ then $\forall \epsilon$ we can find a suitable value of $\delta$ s.t. the continuity condition holds. \\
+At $x=0$ the function is discontinuous. 
+%------------------------------------------------
+%Question 8
+%------------------------------------------------
+\section{Problem 8}
+Given: \\
+Continuous function $f:[0,1] \rightarrow \mathbb{R}$
+Since, $f$ is continuous on $[0,1]$, \\
+$\forall \epsilon ,x \exists \delta \forall y\ \ |x-y| < \delta\  \rightarrow\ |f(x) - f(y)| < \epsilon ,\ x,y \in [0,1]$\\
+Let the partitions of the interval $[0,1]$ be denoted by $x_1, x_2, ... x_n$ s.t. $|x_{i+1} - x_i| < \delta\ \forall i\in [n]$ \\
+For partition $P_i$ \\
+\begin{align*}
+\begin{split}
+	U_i &= f(x_{i+1})(x_{i+1} - x_i)\\
+	L_i &= f(x_i)(x_{i+1} - x_i)\\
+	U_i - L_i &= (f(x_{i+1})-f(x_i))(x_{i+1} - x_i)\\
+	&\leqslant \epsilon(x_{i+1} - x_i)\\
+	\sum_{i=1}^{i=n} ( U_i - L_i) s&= \epsilon (1-0)\\ 
+\end{split}
+\end{align*}
+$\Rightarrow$ $f$ is integrable.
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 9
+%----------------------------------------------------------------------------------------
+
+\section{Problem 9}
+
+%\lipsum[2] % Dummy text
+\begin{align*}
+\begin{split}
+L^1 &= 0\\
+L^2 &= \frac{1}{2^3}(0^2 + 1^2)\\
+L^3 &= \frac{1}{3^3}(0^2 + 1^2 + 2^2)\\
+L^4 &= \frac{1}{4^3}(0^2 + 1^2 + 2^2 + 3^2)\\
+L^5 &= \frac{1}{5^3}(0^2 + 1^2 + 2^2 + 3^2  +4^2)\\
+L^n &= \frac{1}{n^3}(0^2 + 1^2 + ... + (n-1)^2)\\
+& =\frac{(2n-1)n(n-1)}{6n^3}\\
+L^n_{n\rightarrow\infty} &= \frac{1}{3}
+\end{split}
+\end{align*}
+
+Now, checking for upper limit: \\
+\begin{align*}
+\begin{split}
+U^1 &= 1\\
+U^2 &= \frac{(1^2 + 2^2)}{2^3}\\
+U^3 &= \frac{(1^2 + 2^2 + 3^2)}{3^3}\\
+U^n &= \frac{(2n+1)(n+1)n}{6n^3}\\
+U^n_{n\rightarrow\infty} &= \frac{1}{3}\\
+\end{split}
+\end{align*}
+Since, $L^n_{n\rightarrow\infty} = U^n_{n\rightarrow\infty}$
+the function is Reinmann integrable and the value of the integral is: $\frac{1}{3}$
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 10
+%----------------------------------------------------------------------------------------
+\section{Problem 10}
+\textbf{To prove:}\\
+\begin{equation}
+	\mu (A_1\bigtriangleup A_2)=0\; \rightarrow \; \mu(A_1)=\mu(A_2)
+\end{equation}
+\textbf{Proof:}\\
+\begin{align*}
+	\mu(A_1\bigtriangleup A_2)=0\\
+	\Rightarrow \mu(A_1\setminus A_2\cup  A_2\setminus 	A_1)=0\\
+		\text{Since both the sets ar disjoint}\\
+	\Rightarrow \mu(A_1\setminus A_2) + \mu(A_2\setminus A_1)=0\\
+\end{align*}
+Since the range of $\mu$ is $\mathbb{R}^+\cup 0$, both the terms have to be individually 0.\\
+\begin{align*}
+	\Rightarrow \mu(A_1\setminus A_2) = 0\\
+	\text{Also,}\; \mu(A_1) = \mu(A_1\setminus A_2 \cup A_1\cap A_2)\\
+	\mu(A_1) = \mu(A_1\setminus A_2) + \mu(A_1\cap A_2)\\
+	\text{Since both the sets ar disjoint}\\
+	\mu(A_1) = \mu(A_1\cap A_2)\\
+	\text{Similarly,}\; \mu(A_2) = \mu(A_1\cap A_2)\\
+\end{align*}
+Therefore, $\mu(A_1) = \mu(A_2)$
+\end{document}
