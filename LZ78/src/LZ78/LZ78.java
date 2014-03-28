@@ -68,7 +68,7 @@ public class LZ78 {
 			}
 			if(trieNodePointer == null){
 				if(graph){
-					System.out.println(pointer + " " +  ((double)pointer/outputLength));
+					System.out.println(pointer + " " +  (outputLength/(double)pointer));
 				}
 				int delta = phraseNumber - pTNP.getNode().getLocation();
 				if(parse){
@@ -88,9 +88,28 @@ public class LZ78 {
 		return this.outputLength;
 	}
 	
-	public String decompress(String input){
-		
+	private lzNode decode(String input){
+		return new lzNode();
 	}
+	
+	public void decompress(String input){
+		int totalLength = 0;
+		int start=0, end = 1;
+		for(int i=0; ;i++){
+			System.out.println(Math.ceil(Math.log((i+1)*this.alphabetSize)/Math.log(2)));
+			int phraseLength = (int)Math.ceil(Math.log((i+1)*this.alphabetSize)/Math.log(2));
+			System.out.println("phraselength: " + phraseLength);
+			totalLength += phraseLength;
+			if( totalLength > input.length()){
+				break;
+			}
+			end = start + phraseLength;
+			System.out.println(input.substring(start, end));
+			//lzNode returnValue = decode(input.substring(start, end));
+			start = end + 1;			
+		}
+	}
+	
 	/**
 	 * Returns the compressibility ratio of Lempel-Ziv 78 algorithm on the input string.
 	 * @return double-the compressibility ratio of Lempel-Ziv 78 algorithm on the input string.
